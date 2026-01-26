@@ -1,0 +1,7 @@
+# Ignore Terraform state files and directories
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Local configuration files
+.DS_Store
