@@ -4,16 +4,6 @@ variable "region" {
   default     = "ap-northeast-2"
 }
 
-variable "bigbang_public_a_id" {
-  type        = string
-  description = "BigBang public subnet A ID"
-}
-
-variable "bigbang_ec2_sg_id" {
-  type        = string
-  description = "BigBang EC2 security group ID"
-}
-
 variable "availability_zone" {
   type        = string
   description = "Availability Zone for the instance"
@@ -54,4 +44,34 @@ variable "instance_name" {
   type        = string
   description = "Name tag for the instance"
   default     = "BigBang-EC2"
+}
+
+variable "default_vpc_cidr" {
+  type        = string
+  description = "CIDR for the default VPC"
+  default     = "172.31.0.0/16"
+}
+
+variable "bigbang_vpc_cidr" {
+  type        = string
+  description = "CIDR for the BigBang VPC"
+  default     = "10.0.0.0/16"
+}
+
+variable "bigbang_vpc_name" {
+  type        = string
+  description = "Name tag for the BigBang VPC"
+  default     = "BigBangDeploy"
+}
+
+variable "bigbang_ec2_sg_name" {
+  type        = string
+  description = "Name tag for the BigBang EC2 security group"
+  default     = "BigBang-EC2"
+}
+
+variable "bigbang_rds_sg_name" {
+  type        = string
+  description = "Name tag for the BigBang RDS security group"
+  default     = "BigBang-rds"
 }

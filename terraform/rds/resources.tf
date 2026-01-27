@@ -35,11 +35,12 @@ resource "aws_db_instance" "bigbang_rds" {
   port                                  = "3306"
   publicly_accessible                   = "false"
   region                                = "ap-northeast-2"
+  skip_final_snapshot                   = "true"
   storage_encrypted                     = "true"
   storage_throughput                    = "125"
   storage_type                          = "gp3"
   username                              = "admin"
-  vpc_security_group_ids                = [data.terraform_remote_state.sg.outputs.bigbang_rds_sg_id]
+  vpc_security_group_ids                = [var.bigbang_rds_sg_id]
 }
 
 resource "aws_db_snapshot" "bigbang_rds_2026_01_20_0540" {
@@ -64,5 +65,5 @@ resource "aws_db_subnet_group" "bigbang_db_subnet_group" {
   description = "BigBang deploy db subnet group (2 private subnets of BigBang VPC)"
   name        = "bigbang-db-subnet-group"
   region      = "ap-northeast-2"
-  subnet_ids  = [data.terraform_remote_state.subnet.outputs.bigbang_private_db_b_id, data.terraform_remote_state.subnet.outputs.bigbang_private_db_a_id]
+  subnet_ids  = [var.bigbang_private_db_b_id, var.bigbang_private_db_a_id]
 }

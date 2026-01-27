@@ -47,10 +47,6 @@ resource "aws_instance" "bigbang_ec2" {
   monitoring                 = "false"
   placement_partition_number = "0"
 
-  primary_network_interface {
-    network_interface_id = "eni-0644c91c0642770d7"
-  }
-
   private_dns_name_options {
     enable_resource_name_dns_a_record    = "false"
     enable_resource_name_dns_aaaa_record = "false"
@@ -70,7 +66,7 @@ resource "aws_instance" "bigbang_ec2" {
   }
 
   source_dest_check = "true"
-  subnet_id         = data.terraform_remote_state.subnet.outputs.bigbang_public_a_id
+  subnet_id         = var.bigbang_public_a_id
 
   tags = {
     Name = var.instance_name
@@ -81,5 +77,5 @@ resource "aws_instance" "bigbang_ec2" {
   }
 
   tenancy                = "default"
-  vpc_security_group_ids = [data.terraform_remote_state.sg.outputs.bigbang_ec2_sg_id]
+  vpc_security_group_ids = [var.bigbang_ec2_sg_id]
 }

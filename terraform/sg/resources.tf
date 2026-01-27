@@ -44,7 +44,7 @@ resource "aws_security_group" "bigbang_ec2" {
     Name = var.bigbang_ec2_sg_name
   }
 
-  vpc_id = data.terraform_remote_state.vpc.outputs.bigbang_vpc_id
+  vpc_id = var.bigbang_vpc_id
 }
 
 resource "aws_security_group" "bigbang_rds" {
@@ -78,7 +78,7 @@ resource "aws_security_group" "bigbang_rds" {
     Name = var.bigbang_rds_sg_name
   }
 
-  vpc_id = data.terraform_remote_state.vpc.outputs.bigbang_vpc_id
+  vpc_id = var.bigbang_vpc_id
 }
 
 resource "aws_security_group" "default_bigbang_vpc" {
@@ -101,7 +101,7 @@ resource "aws_security_group" "default_bigbang_vpc" {
 
   name   = "default"
   region = var.region
-  vpc_id = data.terraform_remote_state.vpc.outputs.bigbang_vpc_id
+  vpc_id = var.bigbang_vpc_id
 }
 
 resource "aws_security_group" "default_legacy_vpc" {
@@ -124,5 +124,5 @@ resource "aws_security_group" "default_legacy_vpc" {
 
   name   = "default"
   region = var.region
-  vpc_id = data.terraform_remote_state.vpc.outputs.default_vpc_id
+  vpc_id = var.default_vpc_id
 }

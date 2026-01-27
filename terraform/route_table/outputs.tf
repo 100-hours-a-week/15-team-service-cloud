@@ -1,11 +1,3 @@
-output "default_main_rt_assoc_id" {
-  value = aws_main_route_table_association.default_main_rt_assoc.id
-}
-
-output "bigbang_main_rt_assoc_id" {
-  value = aws_main_route_table_association.bigbang_main_rt_assoc.id
-}
-
 output "bigbang_public_b_assoc_id" {
   value = aws_route_table_association.bigbang_public_b_assoc.id
 }

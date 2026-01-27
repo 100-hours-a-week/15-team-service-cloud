@@ -1,7 +1,9 @@
-data "terraform_remote_state" "vpc" {
-  backend = "local"
+variable "default_vpc_id" {
+  type        = string
+  description = "Default VPC ID"
+}
 
-  config = {
-    path = "../vpc/terraform.tfstate"
-  }
+variable "bigbang_vpc_id" {
+  type        = string
+  description = "BigBang VPC ID"
 }

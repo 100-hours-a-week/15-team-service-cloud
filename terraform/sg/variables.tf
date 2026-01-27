@@ -1,15 +1,17 @@
-data "terraform_remote_state" "vpc" {
-  backend = "local"
-
-  config = {
-    path = "../vpc/terraform.tfstate"
-  }
-}
-
 variable "region" {
   type        = string
   description = "AWS region"
   default     = "ap-northeast-2"
+}
+
+variable "default_vpc_id" {
+  type        = string
+  description = "Default VPC ID"
+}
+
+variable "bigbang_vpc_id" {
+  type        = string
+  description = "BigBang VPC ID"
 }
 
 variable "bigbang_ec2_sg_name" {

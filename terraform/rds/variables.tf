@@ -1,15 +1,14 @@
-data "terraform_remote_state" "sg" {
-  backend = "local"
-
-  config = {
-    path = "../sg/terraform.tfstate"
-  }
+variable "bigbang_rds_sg_id" {
+  type        = string
+  description = "BigBang RDS security group ID"
 }
 
-data "terraform_remote_state" "subnet" {
-  backend = "local"
+variable "bigbang_private_db_a_id" {
+  type        = string
+  description = "BigBang private DB subnet A ID"
+}
 
-  config = {
-    path = "../subnet/terraform.tfstate"
-  }
+variable "bigbang_private_db_b_id" {
+  type        = string
+  description = "BigBang private DB subnet B ID"
 }
