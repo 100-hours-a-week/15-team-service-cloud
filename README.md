@@ -21,6 +21,7 @@ CommitMe 서비스 클라우드 관리용 리포지토리 입니다.
 | iam-s3 | - BE 개발 중 S3 PUT, GET presigend URL 발급용 | "Action": ["s3:PutObject", "s3:GetObject" ], <br/> "Resource": "arn:aws:s3:::my-bucket/uploads/*” | theta(풀스택) | O | 사용중 |
 | ssm_parameter_viewer | - 애플리케이션 환경변수 확인용 <br/>(SSM Parameter store 읽기권한) | AmazonSSMReadOnlyAccess | theta(풀스택) <br/> zero(풀스택) <br/> ned(인공지능) | X | 사용중 |
 | terraform | Terraform 관리용 | AdministratorAccess | jun(클라우드) | O | 사용중 |
+| iam-bedrock | 로컬에서 BedRock 호출 테스트용 | AmazonBedrockLimitedAccess | ned(인공지능) | O | 사용중 |
 
 <br/>
 
