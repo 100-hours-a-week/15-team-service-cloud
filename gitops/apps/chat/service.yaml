@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 15team-chat
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: 15team-chat
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP

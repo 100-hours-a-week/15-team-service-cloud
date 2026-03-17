@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 15team-ai
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: 15team-ai
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP

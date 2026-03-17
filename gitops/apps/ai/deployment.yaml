@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 15team-ai
+  namespace: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: 15team-ai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: 15team-ai
+    spec:
+      containers:
+      - name: ai
+        image: 248312021437.dkr.ecr.ap-northeast-2.amazonaws.com/commit-me/ai-server:latest
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 40
+          periodSeconds: 15
