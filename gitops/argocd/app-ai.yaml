@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/100-hours-a-week/15-team-service-cloud.git
-    targetRevision: main
+    targetRevision: argocd
     path: gitops/apps/ai
   destination:
     server: https://kubernetes.default.svc
