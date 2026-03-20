@@ -24,6 +24,9 @@ spec:
       containers:
       - name: chat
         image: 248312021437.dkr.ecr.ap-northeast-2.amazonaws.com/commit-me/chat-server:latest
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
         envFrom:
         - secretRef:
             name: chat-secret
