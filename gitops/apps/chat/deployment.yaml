@@ -18,6 +18,8 @@ spec:
       labels:
         app: 15team-chat
     spec:
+      imagePullSecrets:
+      - name: ecr-secret
       terminationGracePeriodSeconds: 60
       containers:
       - name: chat

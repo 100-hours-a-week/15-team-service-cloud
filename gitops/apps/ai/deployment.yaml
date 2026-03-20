@@ -18,6 +18,8 @@ spec:
       labels:
         app: 15team-ai
     spec:
+      imagePullSecrets:
+      - name: ecr-secret
       containers:
       - name: ai
         image: 248312021437.dkr.ecr.ap-northeast-2.amazonaws.com/commit-me/ai-server:latest
