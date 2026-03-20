@@ -4,7 +4,8 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+- external-secret.yaml
 
 images:
 - name: 248312021437.dkr.ecr.ap-northeast-2.amazonaws.com/commit-me/chat-server
-  newTag: "latest"
+  newTag: "b8e8cc032324324dad89600f1729a22bfa8e2d07"
