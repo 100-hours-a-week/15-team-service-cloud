@@ -7,4 +7,4 @@ resources:
 
 images:
 - name: 248312021437.dkr.ecr.ap-northeast-2.amazonaws.com/commit-me/web-server
-  newTag: "latest"
+  newTag: "a031f3aa25b70b82971bf83e9c3f2d97715edb25"
