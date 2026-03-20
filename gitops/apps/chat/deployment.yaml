@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 15team-chat
+  name: team15-chat
   namespace: production
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: 15team-chat
+      app: team15-chat
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: 15team-chat
+        app: team15-chat
     spec:
       imagePullSecrets:
       - name: ecr-secret

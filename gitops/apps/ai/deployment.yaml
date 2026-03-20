@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 15team-ai
+  name: team15-ai
   namespace: production
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: 15team-ai
+      app: team15-ai
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: 15team-ai
+        app: team15-ai
     spec:
       imagePullSecrets:
       - name: ecr-secret

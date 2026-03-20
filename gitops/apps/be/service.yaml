@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: 15team-be
+  name: team15-be
   namespace: production
 spec:
   type: ClusterIP
   selector:
-    app: 15team-be
+    app: team15-be
   ports:
   - port: 8080
     targetPort: 8080
