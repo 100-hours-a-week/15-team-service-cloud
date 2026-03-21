@@ -39,6 +39,13 @@ data:
             format_sql: false
         show-sql: false
 
+      rabbitmq:
+        host: "${RABBITMQ_HOST}"
+        port: 5672
+        username: "${RABBITMQ_BE_USERNAME}"
+        password: "${RABBITMQ_BE_PASSWORD}"
+        virtual-host: /
+
       flyway:
         enabled: true
         locations: classpath:db/migration
@@ -89,6 +96,11 @@ data:
         secret-key: "${S3_SECRET_KEY}"
         cdn-base-url: "https://cdn.commit-me.com"
         presign-duration-minutes: 30
+      rabbit:
+        notification:
+          queue: notification.queue
+          exchange: notification.events
+          routing-key: notification.requested
       batch:
         outbox-cleanup:
           cron: "0 0 * * * *"
