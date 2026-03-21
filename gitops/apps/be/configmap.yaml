@@ -97,6 +97,9 @@ data:
         cdn-base-url: "https://cdn.commit-me.com"
         presign-duration-minutes: 30
       rabbit:
+        queue: worker.queue
+        exchange: worker.events
+        routing-key: worker.events
         notification:
           queue: notification.queue
           exchange: notification.events
