@@ -89,6 +89,9 @@ data:
         secret-key: "${S3_SECRET_KEY}"
         cdn-base-url: "https://cdn.commit-me.com"
         presign-duration-minutes: 30
+      batch:
+        outbox-cleanup:
+          cron: "0 0 * * * *"
       loadtest:
         mock-auth:
           enabled: true
