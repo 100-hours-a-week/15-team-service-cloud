@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chat-config
+  namespace: production
+data:
+  application-prod.yml: |
+    server:
+      port: 8080
+
+    spring:
+      application:
+        name: Chat
+      datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: "${PROD_DB_NAME}"
+        username: "${PROD_MYSQL_ID}"
+        password: "${PROD_MYSQL_PW}"
+
+      jpa:
+        hibernate:
+          ddl-auto: validate
+        properties:
+          hibernate:
+            format_sql: false
+        show-sql: false
+
+      flyway:
+        enabled: false
+        locations: classpath:db/migration
+        baseline-on-migrate: true
+        baseline-version: "20260204.0"
+
+      data:
+        mongodb:
+          uri: "${MONGO_URI}"
+        redis:
+          host: "${REDIS_IP}"
+          port: 6379
+          password: "${REDIS_PW}"
+
+      rabbitmq:
+        host: "${RABBITMQ_HOST}"
+        port: 5672
+        username: "${RABBITMQ_CHAT_USERNAME}"
+        password: "${RABBITMQ_CHAT_PASSWORD}"
+        virtual-host: /
+        publisher-confirm-type: correlated
+        publisher-returns: true
+        template:
+          mandatory: true
+
+    app:
+      cors:
+        allowed-origins: "${DOMAIN}"
+        allowed-methods:
+          - "GET"
+          - "POST"
+          - "PATCH"
+          - "DELETE"
+          - "OPTIONS"
+        allowed-headers:
+          - "*"
+        exposed-headers:
+          - "Set-Cookie"
+        allow-credentials: true
+        max-age: 600
+      s3:
+        bucket: "${S3_BUCKET_NAME}"
+        region: "ap-northeast-2"
+        access-key: "${S3_ACCESS_KEY}"
+        secret-key: "${S3_SECRET_KEY}"
+        cdn-base-url: "https://cdn.commit-me.com"
+        presign-duration-minutes: 30
+      chat:
+        rabbit:
+          events:
+            exchange: chat.events
+            routing-key: chat.events
+            publish-confirm-timeout: 3s
+            retry-delay: 5s
+          worker:
+            max-retry-count: 3
+            notification:
+              exchange: notification.events
+              routing-key: notification.requested
+
+        rate-limit:
+          enabled: true
+          max-requests: 20
+          window: 10s
+          key-prefix: ":chat:prod:rate-limit:send"
+
+        profanity-filter:
+          enabled: true
+          replacement: "**"
+          minimum-word-length: 2
+          dictionary-location: classpath:profanity/chat-oss-ko-badwords.txt
+          allowlist-location: classpath:profanity/chat-allowlist-ko.txt
+          additional-dictionary-location: ""
+          additional-allowlist-location: ""
+
+        observability:
+          datasource-proxy:
+            enabled: true
+            slow-query-threshold: 200ms
+            proxy-name: chat-data-source-proxy
+            datasource-tag: chat-mysql
+            slow-query-log-enabled: true
+      loadtest:
+        enabled: false
+
+    security:
+      jwt:
+        secret: "${JWT_SECRET}"
+        access-expiration: 1h
+        refresh-expiration: 7d
+
+    management:
+      endpoints:
+        web:
+          exposure:
+            include:
+              - health
+              - info
+              - metrics
+              - prometheus
+      endpoint:
+        prometheus:
+          enabled: true
+      prometheus:
+        metrics:
+          export:
+            enabled: true
+      metrics:
+        tags:
+          application: ${spring.application.name}
+        enable:
+          hikari: true
+        distribution:
+          percentiles-histogram:
+            jdbc.query.execution: true
