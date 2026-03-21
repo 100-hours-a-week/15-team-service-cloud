@@ -92,6 +92,8 @@ data:
       batch:
         outbox-cleanup:
           cron: "0 0 * * * *"
+        partition-management:
+          cron: "0 0 0 * * *"
       loadtest:
         mock-auth:
           enabled: true
