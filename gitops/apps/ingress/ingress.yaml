@@ -37,7 +37,7 @@ spec:
             name: team15-be
             port:
               number: 8080
-  - host: api.v3.commit-me.com
+  - host: apiv3.commit-me.com
     http:
       paths:
       - path: /
