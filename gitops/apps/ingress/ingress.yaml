@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  namespace: production
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: v3.commit-me.com
+    http:
+      paths:
+      - path: /ai
+        pathType: Prefix
+        backend:
+          service:
+            name: team15-ai
+            port:
+              number: 8000
+      - path: /ws
+        pathType: Prefix
+        backend:
+          service:
+            name: team15-chat
+            port:
+              number: 8080
+      - path: /chat
+        pathType: Prefix
+        backend:
+          service:
+            name: team15-chat
+            port:
+              number: 8080
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: team15-be
+            port:
+              number: 8080
+  - host: api.v3.commit-me.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: team15-be
+            port:
+              number: 8080
